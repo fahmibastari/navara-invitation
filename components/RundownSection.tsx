@@ -151,15 +151,6 @@ export default function RundownSection({ rundown }: RundownSectionProps) {
             </div>
           </div>
         </div>
-        
-        {/* Konten akan ditampilkan berdasarkan activeTab hanya pada mobile */}
-        {activeTab === "confirm" && (
-            <div className="md:hidden mt-8">
-                <div className="rounded-3xl bg-white p-6 shadow-xl shadow-gray-200/50 border border-gray-100">
-                    <ConfirmForm />
-                </div>
-            </div>
-        )}
 
       </div>
     </section>
