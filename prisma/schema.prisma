@@ -1,0 +1,123 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model SiteConfig {
+  id            Int      @id @default(1)
+  name          String
+  tagline       String
+  description   String
+  primaryLogo   String?
+  secondaryLogo String?
+  address       String?
+  phone         String?
+  email         String?
+  instagramUrl  String?
+  youtubeUrl    String?
+  facebookUrl   String?
+  tiktokUrl     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model HeroSlide {
+  id        Int      @id @default(autoincrement())
+  title     String
+  subtitle  String?
+  imageUrl  String
+  order     Int      @default(1)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model About {
+  id        Int      @id @default(1)
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RundownItem {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  startTime   String
+  endTime     String
+  order       Int       @default(1)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Facility {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  icon        String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model GallerySection {
+  id          Int            @id @default(autoincrement())
+  title       String
+  description String?
+  images      GalleryImage[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model GalleryImage {
+  id         Int            @id @default(autoincrement())
+  sectionId  Int
+  section    GallerySection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  imageUrl   String
+  caption    String?
+  order      Int            @default(1)
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  name      String
+  rating    Int      @default(5)
+  comment   String
+  sourceUrl String?
+  createdAt DateTime @default(now())
+}
+
+model LocationConfig {
+  id        Int      @id @default(1)
+  address   String
+  mapsEmbed String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Attendance {
+  id               Int      @id @default(autoincrement())
+  fullName         String?  // Opsional
+  email            String?  // Opsional
+  institution      String?  // Opsional
+  attendanceOption String?  // Opsional, HAPUS default("yes")
+  notes            String?  // Opsional
+  createdAt        DateTime @default(now())
+}
+
+
+model Music {
+  id        Int      @id @default(autoincrement())
+  url       String
+  createdAt DateTime @default(now())
+}
